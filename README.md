@@ -2,7 +2,7 @@
 
 ## Clonar el repositorio
 
-Clona el repositorio localmente con el siguiente comando (reemplaza <REPO_URL> por la URL real del repositorio):
+Clona el repositorio localmente con el siguiente comando:
 
 ```cmd
 git clone https://github.com/AxelAV95/prueba-tecnica-backend.git
