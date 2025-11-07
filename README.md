@@ -106,32 +106,3 @@ Se incluyeron tests que cubren:
 
 Se implementó una cola bloqueante con capacidad 10, un productor que inserta números con texto, un transformador que convierte texto a dígitos telefónicos bajo las reglas pedidas, y un consumidor que procesa los valores. Se añadieron pruebas unitarias para validar la lógica crítica.
 
-## Archivos añadidos para despliegue con Docker
-
-He añadido un `Dockerfile` y un archivo `.dockerignore` en la raíz del proyecto para facilitar el despliegue en plataformas como DigitalOcean App Platform o en un Droplet con Docker.
-
-Comandos útiles (cmd.exe):
-
-```cmd
-rem Construir el JAR
-mvn clean package -DskipTests
-
-rem Construir la imagen Docker (en la raíz del repo)
-docker build -t prueba-tecnica-backend:latest .
-
-rem Ejecutar localmente para probar
-docker run -p 8080:8080 prueba-tecnica-backend:latest
-
-rem Subir a Docker Hub (opcional)
-docker tag prueba-tecnica-backend:latest <tu_usuario>/prueba-tecnica-backend:latest
-docker push <tu_usuario>/prueba-tecnica-backend:latest
-
-rem Subir a DigitalOcean Container Registry (opcional)
-docker tag prueba-tecnica-backend:latest registry.digitalocean.com/<registry-name>/prueba-tecnica-backend:latest
-docker push registry.digitalocean.com/<registry-name>/prueba-tecnica-backend:latest
-```
-
-Notas:
-- Si usas Spring Boot y la App Platform de DigitalOcean, asegúrate de que tu aplicación lea la variable de entorno `PORT` (por ejemplo, en `application.properties`: `server.port=${PORT:8080}`).
-- El `HEALTHCHECK` en el `Dockerfile` asume que existe un endpoint de salud (`/actuator/health`). Si no tienes Actuator, la línea no impedirá que la imagen funcione pero la comprobación fallará; puedes retirarla o ajustarla a un endpoint expuesto por tu app.
-
